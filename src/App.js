@@ -12,7 +12,8 @@ class App extends Component {
   state = {
     sports,
     score:0,
-    topScore:0
+    topScore:0,
+    scoreStatus: "Click all images only once to win!"
   }
   
   handleCardClick = id => {
@@ -21,7 +22,8 @@ class App extends Component {
     let update = {
       sports: [ ...this.state.sports],
       score: this.state.score,
-      topScore: this.state.topScore
+      topScore: this.state.topScore,
+      scoreStatus: this.state.scoreStatus
     }
 
     update.sports.forEach(sport => {
@@ -41,21 +43,24 @@ class App extends Component {
 
     if(doubleClick){
       update.sports.forEach(sport => sport.clicked = false);
+      update.scoreStatus = "You've already clicked on this one! You scored: " + update.score + " points";
       update.score = 0;
-    };
-
-    if(update.score && !(update.score % update.sports.length)){
+    } else if(update.score && !(update.score % update.sports.length)){
       update.sports.forEach(sport => sport.clicked = false);
-    };
+      update.scoreStatus = "You won! You selected all correctly.";
+      update.score = 0;
+    } else {
+      update.scoreStatus = "Click all images only once to win!"
+    }
 
     update.sports = update.sports.sort(() => 0.5 - Math.random());
 
-    this.setState({sports: update.sports, score: update.score, topScore: update.topScore});
+    this.setState({sports: update.sports, score: update.score, topScore: update.topScore, scoreStatus: update.scoreStatus});
   }
   render() {
     return (
       <div>
-            <Nav score={this.state.score} topScore={this.state.topScore}/>
+            <Nav score={this.state.score} topScore={this.state.topScore} scoreStatus={this.state.scoreStatus}/>
             <Grid shake={!this.state.score && this.state.topScore}>
               {this.state.sports.map(sport => (
                 <Card 
