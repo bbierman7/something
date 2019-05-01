@@ -1,0 +1,43 @@
+.card {
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    height: 10rem;
+  }
+  
+  .card-img {
+    width: 100%;
+    border-radius: calc(.25rem - 1px);
+    height: 100%;
+  }
+  
+  .finish {
+    animation: won .5s 0.125s;
+  }
+  
+  @keyframes won {
+  
+    0% {
+      transform: scale(.95); 
+    }
+    25% {
+      transform: scale(1.20); 
+    }
+    50% {
+      transform: scale(.95); 
+    }
+    75% {
+      transform: scale(1.20); 
+    }
+    100% {
+      transform: scale(.95); 
+    }
+    
+  }
+  
+  
